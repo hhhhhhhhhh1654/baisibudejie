@@ -79,7 +79,7 @@ static NSString * const XMGTopicCellId = @"topicCell";
     //注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([XMGTopicCellTableViewCell class]) bundle:nil] forCellReuseIdentifier:XMGTopicCellId];
     
-    self.tableView.rowHeight = 250;
+    self.tableView.rowHeight = 50;
     
     
     
@@ -91,6 +91,7 @@ static NSString * const XMGTopicCellId = @"topicCell";
 {
     
     self.tableView.mj_header = [XMGRefreshHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewTopcis)];
+    [self.tableView.mj_header beginRefreshing];
     
     self.tableView.mj_footer = [XMGRefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTopics)];
  
@@ -129,6 +130,13 @@ static NSString * const XMGTopicCellId = @"topicCell";
             
         }
         
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.tableView reloadData];
+        });
+        
+
+        
         //让控件刷新控件结束刷新
         
         [self.tableView.mj_header endRefreshing];
@@ -137,7 +145,7 @@ static NSString * const XMGTopicCellId = @"topicCell";
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-               [self.tableView.mj_footer endRefreshing];
+               [self.tableView.mj_header endRefreshing];
     }];
     
     
@@ -175,7 +183,10 @@ static NSString * const XMGTopicCellId = @"topicCell";
         }
 
         // 刷新表格
-        [self.tableView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.tableView reloadData];
+        });
         
         // 让[刷新控件]结束刷新
         [self.tableView.mj_footer endRefreshing];
@@ -196,7 +207,8 @@ static NSString * const XMGTopicCellId = @"topicCell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     
-    return 10;
+  return self.topics.count;
+    
 }
 
 

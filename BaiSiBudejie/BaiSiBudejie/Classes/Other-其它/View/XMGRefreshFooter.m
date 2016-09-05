@@ -36,13 +36,13 @@
     
     
     //刷新控件出现到一半就会进入
-    self.triggerAutomaticallyRefreshPercent = 0.5;
+    self.triggerAutomaticallyRefreshPercent = -2;
     
     
     
     
-    //不要自动刷新
-    self.automaticallyRefresh = NO;
+    //自动刷新
+    self.automaticallyRefresh = YES;
     
     
 //    self.automaticallyHidden = NO;
