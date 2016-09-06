@@ -36,19 +36,18 @@
     
     
     //刷新控件出现到一半就会进入
-    self.triggerAutomaticallyRefreshPercent = -2;
+    self.triggerAutomaticallyRefreshPercent = -1;
     
     
     
     
     //自动刷新
     self.automaticallyRefresh = YES;
+    self.backgroundColor = [UIColor whiteColor];
     
     
 //    self.automaticallyHidden = NO;
-    
-    
-    
+
     
 }
 
@@ -56,25 +55,6 @@
 
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

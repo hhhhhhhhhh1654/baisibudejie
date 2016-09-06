@@ -27,7 +27,7 @@
 #import "XMGRefreshFooter.h"
 #import "XMGRefreshHeader.h"
 #import "XMGHTTPSessionManager.h"
-
+#import <UIImageView+WebCache.h>
 
 /*** 日志 ***/
 #ifdef DEBUG

@@ -79,7 +79,7 @@ static NSString * const XMGTopicCellId = @"topicCell";
     //注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([XMGTopicCellTableViewCell class]) bundle:nil] forCellReuseIdentifier:XMGTopicCellId];
     
-    self.tableView.rowHeight = 50;
+    self.tableView.rowHeight = 250;
     
     
     
@@ -165,7 +165,11 @@ static NSString * const XMGTopicCellId = @"topicCell";
     params[@"maxtime"] = self.maxtime;
     
     // 发送请求
-    [self.manager GET:XMGCommonURL parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+    [self.manager GET:XMGCommonURL parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
         // 存储这页对应的maxtime
         self.maxtime = responseObject[@"info"][@"maxtime"];
         
@@ -173,7 +177,7 @@ static NSString * const XMGTopicCellId = @"topicCell";
         NSArray<XMGTopic *> *moreTopics = [XMGTopic mj_objectArrayWithKeyValuesArray:responseObject[@"list"]];
         [self.topics addObjectsFromArray:moreTopics];
         
-        XMGWriteToPlist(responseObject, @"2222")
+//        XMGWriteToPlist(responseObject, @"2222")
         
         for (NSUInteger i = 0; i < self.topics.count; i++) {
             if (self.topics[i].top_cmt.count) {
@@ -214,22 +218,30 @@ static NSString * const XMGTopicCellId = @"topicCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    
-    // 1.确定重用标示:
-    static NSString *ID = @"cell";
-    
-    // 2.从缓存池中取
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    // 3.如果空就手动创建
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
-        cell.backgroundColor = XMGRandomColor;
-    }
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %zd", [self class], indexPath.row];
-    
+    XMGTopicCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:XMGTopicCellId forIndexPath:indexPath];
+
+    cell.topic = self.topics[indexPath.row];
+
+
     return cell;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @end

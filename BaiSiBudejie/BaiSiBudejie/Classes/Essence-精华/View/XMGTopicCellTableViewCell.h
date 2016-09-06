@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+#import "XMGTopic.h"
+
 @interface XMGTopicCellTableViewCell : UITableViewCell
+
+/**
+ *  帖子数据模型
+ */
+@property(nonatomic, strong)  XMGTopic*topic;
+
 
 @end
