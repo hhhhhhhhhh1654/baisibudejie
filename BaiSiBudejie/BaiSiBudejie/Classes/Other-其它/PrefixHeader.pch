@@ -28,7 +28,7 @@
 #import "XMGRefreshHeader.h"
 #import "XMGHTTPSessionManager.h"
 #import <UIImageView+WebCache.h>
-
+#import "XMGExtensionConfig.h"
 /*** 日志 ***/
 #ifdef DEBUG
 #define XMGLog(...) NSLog(__VA_ARGS__)

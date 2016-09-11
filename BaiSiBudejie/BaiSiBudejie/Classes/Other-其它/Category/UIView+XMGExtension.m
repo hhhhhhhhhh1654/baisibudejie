@@ -115,4 +115,56 @@
 {
     self.xmg_y = xmg_bottom - self.xmg_height;
 }
+
++ (instancetype)viewFromXib
+{
+    return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil].lastObject;
+}
+
+-(void)removeAllSubViews{
+    
+    for (UIView *view in self.subviews) {
+        
+        [view removeFromSuperview];
+        
+    }
+    
+    
+}
+
+
+
+-(NSString *)logframe{
+    
+    
+    return NSStringFromCGRect(self.frame);
+    
+    
+}
+
+
+
+
+-(NSString *)logcenter{
+    
+    return NSStringFromCGPoint(self.center);
+}
+
+
+
+
+-(NSString *)logContentInset{
+    
+    if ([self isKindOfClass:[UIScrollView class]]) {
+        UIScrollView *scorllview = (UIScrollView *)self;
+        return NSStringFromUIEdgeInsets(scorllview.contentInset);
+        
+    }else{
+        
+        return @"没有这个属性";
+    }
+    
+    
+}
+
 @end

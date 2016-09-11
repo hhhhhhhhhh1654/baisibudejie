@@ -19,4 +19,16 @@
 
 @property (nonatomic, assign) CGFloat xmg_right;
 @property (nonatomic, assign) CGFloat xmg_bottom;
+
++ (instancetype)viewFromXib;
+
+-(void)removeAllSubViews;
+//为了打印frame方便
+@property(nonatomic, strong,readonly) NSString *logframe;
+
+@property(nonatomic, strong,readonly) NSString *logcenter;
+
+@property(nonatomic, strong,readonly) NSString *logContentInset;
+
+
 @end

@@ -16,7 +16,7 @@
     
     self.stateLabel.textColor = [UIColor redColor];
     
-   [ self addSubview:[UIButton buttonWithType:(UIButtonTypeContactAdd)]];
+//   [ self addSubview:[UIButton buttonWithType:(UIButtonTypeContactAdd)]];
     
 //    
 //    

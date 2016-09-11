@@ -108,6 +108,7 @@ static NSString * const XMGTopicCellId = @"topicCell";
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"a"] = @"list";
     params[@"c"] = @"data";
+    params[@"type"] = @"10";
     
     //参数
     [self.manager GET:XMGCommonURL parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
@@ -122,13 +123,6 @@ static NSString * const XMGTopicCellId = @"topicCell";
         self.topics = [XMGTopic mj_objectArrayWithKeyValuesArray:responseObject[@"list"]];
         
         XMGWriteToPlist(responseObject, @"1111")
-        
-        for (NSUInteger i = 0; i < self.topics.count; i++) {
-            if (self.topics[i].top_cmt.count) {
-                XMGLog(@"下拉刷新 - %zd", i);
-            }
-            
-        }
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
@@ -162,6 +156,7 @@ static NSString * const XMGTopicCellId = @"topicCell";
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"a"] = @"list";
     params[@"c"] = @"data";
+    params[@"type"] = @"10";
     params[@"maxtime"] = self.maxtime;
     
     // 发送请求
@@ -179,12 +174,7 @@ static NSString * const XMGTopicCellId = @"topicCell";
         
 //        XMGWriteToPlist(responseObject, @"2222")
         
-        for (NSUInteger i = 0; i < self.topics.count; i++) {
-            if (self.topics[i].top_cmt.count) {
-                XMGLog(@"下拉刷新 - %zd", i);
-            }
-            
-        }
+
 
         // 刷新表格
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -229,7 +219,10 @@ static NSString * const XMGTopicCellId = @"topicCell";
 
 
 
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return self.topics[indexPath.row].cellHeight;
+}
 
 
 
