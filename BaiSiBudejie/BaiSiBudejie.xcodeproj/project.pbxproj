@@ -22,6 +22,7 @@
 		1547CE8D1D748277002BCF4A /* XMGWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1547CE8B1D748277002BCF4A /* XMGWebViewController.xib */; };
 		1560C6131D80542E00BD7FD8 /* NSCalendar+XMGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1560C6121D80542E00BD7FD8 /* NSCalendar+XMGExtension.m */; };
 		1560C6161D80574900BD7FD8 /* NSDate+XMGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1560C6151D80574900BD7FD8 /* NSDate+XMGExtension.m */; };
+		1562F70D1D8BC65B00812CB7 /* XMGTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1562F70C1D8BC65B00812CB7 /* XMGTopicViewController.m */; };
 		1582B1571D68AD5D00892956 /* XMGLoginRegisterTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 1582B1561D68AD5D00892956 /* XMGLoginRegisterTextField.m */; };
 		1582B15A1D68AE1E00892956 /* UITextField+XMGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1582B1591D68AE1E00892956 /* UITextField+XMGExtension.m */; };
 		15D127EA1D65EB26004B6443 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D127E91D65EB26004B6443 /* main.m */; };
@@ -118,6 +119,8 @@
 		1560C6121D80542E00BD7FD8 /* NSCalendar+XMGExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+XMGExtension.m"; sourceTree = "<group>"; };
 		1560C6141D80574900BD7FD8 /* NSDate+XMGExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+XMGExtension.h"; sourceTree = "<group>"; };
 		1560C6151D80574900BD7FD8 /* NSDate+XMGExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+XMGExtension.m"; sourceTree = "<group>"; };
+		1562F70B1D8BC65B00812CB7 /* XMGTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMGTopicViewController.h; sourceTree = "<group>"; };
+		1562F70C1D8BC65B00812CB7 /* XMGTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMGTopicViewController.m; sourceTree = "<group>"; };
 		1582B1551D68AD5D00892956 /* XMGLoginRegisterTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMGLoginRegisterTextField.h; sourceTree = "<group>"; };
 		1582B1561D68AD5D00892956 /* XMGLoginRegisterTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMGLoginRegisterTextField.m; sourceTree = "<group>"; };
 		1582B1581D68AE1E00892956 /* UITextField+XMGExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+XMGExtension.h"; sourceTree = "<group>"; };
@@ -321,6 +324,8 @@
 			children = (
 				15D1283D1D65F5A3004B6443 /* XMGEssenceViewController.h */,
 				15D1283E1D65F5A3004B6443 /* XMGEssenceViewController.m */,
+				1562F70B1D8BC65B00812CB7 /* XMGTopicViewController.h */,
+				1562F70C1D8BC65B00812CB7 /* XMGTopicViewController.m */,
 				15EA9FC41D7A9B1000BB25A2 /* XMGAllViewController.h */,
 				15EA9FC51D7A9B1000BB25A2 /* XMGAllViewController.m */,
 				15EA9FC71D7A9B4E00BB25A2 /* XMGVideoViewController.h */,
@@ -821,6 +826,7 @@
 				1560C6131D80542E00BD7FD8 /* NSCalendar+XMGExtension.m in Sources */,
 				15EA9FCF1D7A9B7F00BB25A2 /* XMGPictureViewController.m in Sources */,
 				15D1285B1D660812004B6443 /* UITabBarItem+XMGExtension.m in Sources */,
+				1562F70D1D8BC65B00812CB7 /* XMGTopicViewController.m in Sources */,
 				15EA9FC61D7A9B1000BB25A2 /* XMGAllViewController.m in Sources */,
 				15070F1A1D6C96CB005B632B /* XMGMeSquare.m in Sources */,
 			);

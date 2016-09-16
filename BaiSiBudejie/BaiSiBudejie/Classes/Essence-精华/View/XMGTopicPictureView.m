@@ -10,11 +10,11 @@
 #import <DALabeledCircularProgressView.h>
 
 @interface XMGTopicPictureView ()
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *seeBigButton;
 @property (weak, nonatomic) IBOutlet UIImageView *gifView;
 @property (weak, nonatomic) IBOutlet DALabeledCircularProgressView *progressView;
-
 
 
 @end
@@ -36,23 +36,61 @@
     
     _topic = topic;
     
-    self.progressView.hidden = NO;
+    
+    self.progressView.hidden = YES;
+
+    self.progressView.progress = 0;
+    
+     __weak typeof(self) weakSelf = self;
     
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:topic.large_image] placeholderImage:nil options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
         
         //reveivedSize :  已经接收到的图片大小
         //expectedSize :  图片的总大小
-        CGFloat progress = 1.0*receivedSize/expectedSize;
-        self.progressView.progress = progress;
-        self.progressView.hidden = NO;
-        self.progressView.progressLabel.text = [NSString stringWithFormat:@"%.0f%%", progress*100];
+        NSURL *url = [NSURL URLWithString:topic.large_image];
         
-        NSLog(@" 哈哈哈哈哈哈哈： %f", progress);
         
+        if ([[self.imageView.sd_imageURL description]isEqualToString:[url description]]) {
+            
+
+            CGFloat progress = 1.0*receivedSize/expectedSize;
+            weakSelf.progressView.progress = progress;
+            weakSelf.progressView.hidden = NO;
+            weakSelf.progressView.progressLabel.text = [NSString stringWithFormat:@"%.0f%%", progress*100];
+            
+            if (([weakSelf.progressView.progressLabel.text isEqualToString:@"-0%"])) {
+                
+                weakSelf.progressView.progressLabel.text = @"0%";
+                
+            }
+            
+            if (progress==1) {
+                
+                weakSelf.progressView.hidden = YES;
+            }
+            
+            if (self.imageView.image) {
+                weakSelf.progressView.hidden = YES;
+                
+            }else{
+                weakSelf.progressView.hidden = NO;
+            }
+            
+            
+        }
+   
+
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
-        self.progressView.hidden = YES;
-        NSLog(@" 隐藏在进度条  ");
+
+//        NSLog(@" 隐藏在进度条  ");
+        
+        if ([[self.imageView.sd_imageURL description]isEqualToString:[imageURL description]]) {
+            
+           weakSelf.progressView.hidden = YES;
+            
+        }
+        
 
         
     }];

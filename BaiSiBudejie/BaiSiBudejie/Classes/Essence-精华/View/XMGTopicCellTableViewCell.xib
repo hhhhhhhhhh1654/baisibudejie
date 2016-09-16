@@ -198,6 +198,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="Ihk-3V-Sgt" secondAttribute="trailing" id="tl8-ej-eQ4"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="caiButton" destination="aF4-QT-6UG" id="65D-wW-gTg"/>
                 <outlet property="commentButton" destination="Hb1-jE-Z5v" id="xQO-CX-5Kb"/>

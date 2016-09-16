@@ -59,7 +59,7 @@
     if (!_conterContentView) {
         _conterContentView = [[UIView alloc]init];
         
-        _conterContentView.backgroundColor = [UIColor redColor];
+        _conterContentView.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_conterContentView];
     }
     
@@ -130,8 +130,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
 
-    self.backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"mainCellBackground"]];
+      self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mainCellBackground"]];
     
+//    self.backgroundColor = [UIColor grayColor];
 }
 
 -(void)setTopic:(XMGTopic *)topic{
@@ -170,9 +171,7 @@
    
        [self.conterContentView addSubview:self.videoView];
        self.videoView.topic = topic;
-       
-    
-       NSLog(@"%zd %@  %@",self.conterContentView.subviews.count, self.conterContentView.logframe, self.videoView.logframe);
+
        
    } else if (topic.type == XMGTopicTypeVoice) { // 音频
        

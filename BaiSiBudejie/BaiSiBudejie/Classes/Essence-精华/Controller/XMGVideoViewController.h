@@ -6,8 +6,8 @@
 //  Copyright © 2016年 dfgsg. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "XMGTopicViewController.h"
 
-@interface XMGVideoViewController : UITableViewController
+@interface XMGVideoViewController : XMGTopicViewController
 
 @end
