@@ -8,6 +8,10 @@
 
 #import "XMGTopicPictureView.h"
 #import <DALabeledCircularProgressView.h>
+#import "XMGSeeBigViewController.h"
+
+
+
 
 @interface XMGTopicPictureView ()
 
@@ -30,7 +34,27 @@
     self.autoresizingMask = UIViewAutoresizingNone;
     self.progressView.roundedCorners = 5;
     self.progressView.progressLabel.textColor = [UIColor whiteColor];
+    
+    self.imageView.userInteractionEnabled = YES;
+    [self.imageView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(sigBig)]];
+
 }
+
+-(void)sigBig{
+    
+    XMGSeeBigViewController *seeBig = [[XMGSeeBigViewController alloc]init];
+    seeBig.topic = self.topic;
+    
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:seeBig animated:YES completion:nil];
+
+    
+}
+
+
+
+
+
+
 
 -(void)setTopic:(XMGTopic *)topic{
     

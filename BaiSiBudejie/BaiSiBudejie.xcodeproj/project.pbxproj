@@ -23,6 +23,8 @@
 		1560C6131D80542E00BD7FD8 /* NSCalendar+XMGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1560C6121D80542E00BD7FD8 /* NSCalendar+XMGExtension.m */; };
 		1560C6161D80574900BD7FD8 /* NSDate+XMGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1560C6151D80574900BD7FD8 /* NSDate+XMGExtension.m */; };
 		1562F70D1D8BC65B00812CB7 /* XMGTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1562F70C1D8BC65B00812CB7 /* XMGTopicViewController.m */; };
+		1562F7111D8C385800812CB7 /* XMGSeeBigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1562F70F1D8C385800812CB7 /* XMGSeeBigViewController.m */; };
+		1562F7121D8C385800812CB7 /* XMGSeeBigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1562F7101D8C385800812CB7 /* XMGSeeBigViewController.xib */; };
 		1582B1571D68AD5D00892956 /* XMGLoginRegisterTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 1582B1561D68AD5D00892956 /* XMGLoginRegisterTextField.m */; };
 		1582B15A1D68AE1E00892956 /* UITextField+XMGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1582B1591D68AE1E00892956 /* UITextField+XMGExtension.m */; };
 		15D127EA1D65EB26004B6443 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D127E91D65EB26004B6443 /* main.m */; };
@@ -121,6 +123,9 @@
 		1560C6151D80574900BD7FD8 /* NSDate+XMGExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+XMGExtension.m"; sourceTree = "<group>"; };
 		1562F70B1D8BC65B00812CB7 /* XMGTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMGTopicViewController.h; sourceTree = "<group>"; };
 		1562F70C1D8BC65B00812CB7 /* XMGTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMGTopicViewController.m; sourceTree = "<group>"; };
+		1562F70E1D8C385800812CB7 /* XMGSeeBigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMGSeeBigViewController.h; sourceTree = "<group>"; };
+		1562F70F1D8C385800812CB7 /* XMGSeeBigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMGSeeBigViewController.m; sourceTree = "<group>"; };
+		1562F7101D8C385800812CB7 /* XMGSeeBigViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XMGSeeBigViewController.xib; sourceTree = "<group>"; };
 		1582B1551D68AD5D00892956 /* XMGLoginRegisterTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMGLoginRegisterTextField.h; sourceTree = "<group>"; };
 		1582B1561D68AD5D00892956 /* XMGLoginRegisterTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMGLoginRegisterTextField.m; sourceTree = "<group>"; };
 		1582B1581D68AE1E00892956 /* UITextField+XMGExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+XMGExtension.h"; sourceTree = "<group>"; };
@@ -336,6 +341,9 @@
 				15EA9FCE1D7A9B7F00BB25A2 /* XMGPictureViewController.m */,
 				15EA9FD01D7A9BCA00BB25A2 /* XMGWordViewController.h */,
 				15EA9FD11D7A9BCA00BB25A2 /* XMGWordViewController.m */,
+				1562F70E1D8C385800812CB7 /* XMGSeeBigViewController.h */,
+				1562F70F1D8C385800812CB7 /* XMGSeeBigViewController.m */,
+				1562F7101D8C385800812CB7 /* XMGSeeBigViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -700,6 +708,7 @@
 			files = (
 				15FA98BC1D8530E400129FDB /* XMGTopicPictureView.xib in Resources */,
 				1547CE8D1D748277002BCF4A /* XMGWebViewController.xib in Resources */,
+				1562F7121D8C385800812CB7 /* XMGSeeBigViewController.xib in Resources */,
 				15DF99731D79D095004BC04C /* XMGOtherCell.xib in Resources */,
 				15FA98BE1D8530E400129FDB /* XMGTopicVideoView.xib in Resources */,
 				15FBA8201D7BFB7700667722 /* 11111.jpg in Resources */,
@@ -787,6 +796,7 @@
 				15070F1D1D6C986E005B632B /* XMGMeSquareButton.m in Sources */,
 				15DDECF21D7BE5A100BFCFA0 /* XMGRefreshHeader.m in Sources */,
 				15EA9FCC1D7A9B6A00BB25A2 /* XMGVoiceViewController.m in Sources */,
+				1562F7111D8C385800812CB7 /* XMGSeeBigViewController.m in Sources */,
 				15D128551D65FA0E004B6443 /* XMGTabBar.m in Sources */,
 				15FA98BB1D8530E400129FDB /* XMGTopicPictureView.m in Sources */,
 				1582B15A1D68AE1E00892956 /* UITextField+XMGExtension.m in Sources */,

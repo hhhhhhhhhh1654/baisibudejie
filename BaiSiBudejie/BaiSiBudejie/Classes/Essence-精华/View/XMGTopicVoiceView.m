@@ -7,6 +7,7 @@
 //
 
 #import "XMGTopicVoiceView.h"
+#import "XMGSeeBigViewController.h"
 
 @interface XMGTopicVoiceView ()
 @property (weak, nonatomic) IBOutlet UILabel *playCountLabel;
@@ -25,6 +26,19 @@
     // 从xib中加载进来的控件的autoresizingMask默认是UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight
     
     self.autoresizingMask = UIViewAutoresizingNone;
+    self.imageView.userInteractionEnabled = YES;
+    [self.imageView addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(sigBig)]];
+    
+}
+
+-(void)sigBig{
+    
+    XMGSeeBigViewController *seeBig = [[XMGSeeBigViewController alloc]init];
+    seeBig.topic = self.topic;
+    
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:seeBig animated:YES completion:nil];
+    
+    
 }
 
 -(void)setTopic:(XMGTopic *)topic{
