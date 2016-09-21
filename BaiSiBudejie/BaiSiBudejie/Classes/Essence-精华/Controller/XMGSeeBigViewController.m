@@ -7,10 +7,12 @@
 //
 
 #import "XMGSeeBigViewController.h"
-
+#import "XMGTopic.h"
 #import <SVProgressHUD.h>
 
+//#import <AssetsLibrary/AssetsLibrary.h>   //iOS9开始废弃
 
+#import <Photos/Photos.h>
 
 @interface XMGSeeBigViewController ()<UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
@@ -19,10 +21,8 @@
 @end
 
 @implementation XMGSeeBigViewController
-- (IBAction)save {
-    
-    [self saveAction];
-}
+
+static NSString *XMGAssetCollectionTitle = @"YB----嘿嘿嘿嘿嘿嘿";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -67,6 +67,120 @@
 
 }
 
+- (IBAction)save {
+    /**
+     *  
+     
+     PHAuthorizationStatusNotDetermined     用户还没有做出选择
+     PHAuthorizationStatusRestricted,       因为家长控制, 导致应用无法选择相册  (跟用户的选择没有关系)
+     PHAuthorizationStatusDenied,           用户拒绝当前应用访问相册(用户当初点击了"不允许")
+     PHAuthorizationStatusAuthorized        用户允许当前应用访问相册(用户当初点击了"好")
+
+     
+     */
+    
+    
+//    [self saveAction];
+//    先判断授权状态
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    
+    if (status == PHAuthorizationStatusRestricted){
+        
+        [SVProgressHUD showErrorWithStatus:@"因为系统原因, 无法访问相册"];
+        
+    }else if (status == PHAuthorizationStatusDenied){
+        
+        XMGLog(@"提醒用户去[设置-隐私-照片-xxxx]打开访问开关");
+        
+        
+    }else if (status == PHAuthorizationStatusAuthorized){
+        
+        [self saveImage];
+        
+    }else if (status == PHAuthorizationStatusNotDetermined){
+        
+        //弹窗请求用户授权
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+           
+            if (status == PHAuthorizationStatusAuthorized) {  //用户点击了好
+                [self saveImage];
+            }
+            
+        }];
+        
+        
+    }
+    
+    
+}
+
+-(void)saveImage{
+    // PAAsset : 一个资源, 比如一张图片\一段视频
+    // PHAssetCollection  : 一个相薄
+    
+    // PHAsset的标识, 利用这个标识可以找到对应的PHAsset对象(图片对象)
+    __block NSString *assetlocalIdentifier = nil;
+    
+    // 如果相对"相册" 进行修改(增删改), 那么修改代码必须放在 [PHPhotoLibrary sharedPhotoLibrary]的performChanges方法的block中
+
+    
+    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+        
+        //1、  保存图片A到"相机胶卷"中
+        //  创建图片的请求
+        
+        assetlocalIdentifier = [PHAssetCreationRequest creationRequestForAssetFromImage:self.imageView.image].placeholderForCreatedAsset.localIdentifier;
+        
+    } completionHandler:^(BOOL success, NSError * _Nullable error) {
+        
+        if (success == NO) {
+            [self showErrorWithString:@"图片保存失败"];
+            return ;
+        }
+        
+        //2. 获得相薄
+        
+        PHAssetCollection *createAssetCollection =[self createAssetCollection];
+        
+        if (createAssetCollection == nil) {
+            [self showErrorWithString:@"创建相薄失败！"];
+            return;
+        }
+        // 3. 添加"相机胶卷"中的图片A到"相薄"D中
+        
+        [[PHPhotoLibrary sharedPhotoLibrary]performChanges:^{
+            
+            //获得图片
+            
+            PHAsset *asset = [PHAsset fetchAssetsWithLocalIdentifiers:@[assetlocalIdentifier] options:nil].lastObject;
+            
+            //添加图片到相薄中的请求
+            PHAssetCollectionChangeRequest *request = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:createAssetCollection];
+            
+            //添加图片到相薄
+            
+            [request addAssets:@[asset]];
+            
+            
+            
+            
+        } completionHandler:^(BOOL success, NSError * _Nullable error) {
+            
+            if (success == NO) {
+                [self showErrorWithString:@"保存图片失败"];
+            }else{
+                
+                [self showSuccessWithStrign:@"保存图片成功"];
+            }
+            
+            
+        }];
+
+        
+    }];
+    
+}
+
 /**  * 返回一个scrollView的子控件进行缩放  */
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{
     
@@ -81,6 +195,51 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+/**
+ *  获得相薄
+ *
+ *
+ */
+
+-(PHAssetCollection *)createAssetCollection{
+ 
+    
+    //从已经存在的相薄中查找这个应用对应的相薄
+    PHFetchResult<PHAssetCollection *> *assetCollections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
+    
+    for (PHAssetCollection *assetCollection in assetCollections) {
+        if ([assetCollection.localizedTitle isEqualToString:XMGAssetCollectionTitle]) {
+            
+            return assetCollection;
+        }
+        
+    }
+    
+    //没有找到对应的相薄, 得创建的新相薄
+    //错误信息
+    
+    NSError *error = nil;
+    
+    // PHAssetCollection的标示,利用这个标识可以找到对应PHAssetCollection对象(相薄对象)
+    
+    __block NSString *assetCollectionLocalIdentifier = nil;
+    
+    [[PHPhotoLibrary sharedPhotoLibrary]performChangesAndWait:^{
+     
+        assetCollectionLocalIdentifier = [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:XMGAssetCollectionTitle].placeholderForCreatedAssetCollection.localIdentifier;
+
+        
+    } error:&error];
+    
+    
+    //如果有错误信息
+    if (error) return nil;
+    
+    //获得刚才创建的相薄
+    return [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[assetCollectionLocalIdentifier] options:nil].lastObject;
+
+    
+}
 
 
 //保存图片
